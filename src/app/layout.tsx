@@ -3,6 +3,9 @@ import "@/styles/globals.css";
 import { Inter } from "next/font/google";
 
 import { TRPCReactProvider } from "@/trpc/react";
+import { cn } from "@/app/_lib/utils";
+import Navbar from "./_components/navbar";
+import Footer from "./_components/footer";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -22,8 +25,16 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`font-sans ${inter.variable}`}>
-        <TRPCReactProvider>{children}</TRPCReactProvider>
+      <body
+        className={cn("relative h-full font-sans antialiased", inter.className)}
+      >
+        <Navbar />
+        <main className="relative flex min-h-screen flex-col">
+          <TRPCReactProvider>
+            <div className="flex-1 flex-grow">{children}</div>
+          </TRPCReactProvider>
+        </main>
+        <Footer />
       </body>
     </html>
   );
