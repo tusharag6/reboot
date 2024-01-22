@@ -6,6 +6,7 @@ import { TRPCReactProvider } from "@/trpc/react";
 import { cn } from "@/app/_lib/utils";
 import Navbar from "./_components/navbar";
 import Footer from "./_components/footer";
+import { ClerkProvider } from "@clerk/nextjs";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -24,18 +25,23 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body
-        className={cn("relative h-full font-sans antialiased", inter.className)}
-      >
-        <Navbar />
-        <main className="relative flex min-h-screen flex-col">
-          <TRPCReactProvider>
-            <div className="flex-1 flex-grow">{children}</div>
-          </TRPCReactProvider>
-        </main>
-        <Footer />
-      </body>
-    </html>
+    <ClerkProvider>
+      <html lang="en">
+        <body
+          className={cn(
+            "relative h-full font-sans antialiased",
+            inter.className,
+          )}
+        >
+          <Navbar />
+          <main className="relative flex min-h-screen flex-col">
+            <TRPCReactProvider>
+              <div className="flex-1 flex-grow">{children}</div>
+            </TRPCReactProvider>
+          </main>
+          <Footer />
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }
