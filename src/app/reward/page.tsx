@@ -1,4 +1,5 @@
 import { Coins, Medal, Store } from "lucide-react";
+import Link from "next/link";
 import React from "react";
 
 const RewardPage = () => {
@@ -38,17 +39,17 @@ const RewardPage = () => {
         <div className="mx-auto flex justify-center gap-4">
           <div className="max-w-sm rounded-lg border border-gray-200 bg-white p-6 shadow dark:border-gray-700 dark:bg-gray-800">
             <Store className="mb-3 h-7 w-7 text-gray-500 dark:text-gray-400" />
-            <a href="#">
+            <Link href="/shop">
               <h5 className="mb-2 text-2xl font-semibold tracking-tight text-gray-900 dark:text-white">
                 Explore Our Sustainable Shop
               </h5>
-            </a>
+            </Link>
             <p className="mb-3 font-normal text-gray-500 dark:text-gray-400">
               Discover eco-friendly products in our online shop and redeem your
               coins for sustainable purchases.
             </p>
-            <a
-              href="#"
+            <Link
+              href="/shop"
               className="inline-flex items-center text-blue-600 hover:underline"
             >
               See Our Products
@@ -67,7 +68,7 @@ const RewardPage = () => {
                   d="M15 11v4.833A1.166 1.166 0 0 1 13.833 17H2.167A1.167 1.167 0 0 1 1 15.833V4.167A1.166 1.166 0 0 1 2.167 3h4.618m4.447-2H17v5.768M9.111 8.889l7.778-7.778"
                 />
               </svg>
-            </a>
+            </Link>
           </div>
           <div className="max-w-sm rounded-lg border border-gray-200 bg-white p-6 shadow dark:border-gray-700 dark:bg-gray-800">
             <Medal className="mb-3 h-7 w-7 text-gray-500 dark:text-gray-400" />
