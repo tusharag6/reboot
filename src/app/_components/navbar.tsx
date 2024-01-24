@@ -2,6 +2,7 @@ import React from "react";
 import Image from "next/image";
 import { SignInButton, UserButton, auth } from "@clerk/nextjs";
 import { Button } from "./ui/button";
+import Link from "next/link";
 
 const Navbar = async () => {
   const { userId } = auth();
@@ -118,45 +119,45 @@ const Navbar = async () => {
         >
           <ul className="mt-4 flex flex-col rounded-lg border border-gray-100 bg-gray-50 p-4 font-medium dark:border-gray-700 dark:bg-gray-800 md:mt-0 md:flex-row md:space-x-8 md:border-0 md:bg-white md:p-0 md:dark:bg-gray-900 rtl:space-x-reverse">
             <li>
-              <a
-                href="#"
+              <Link
+                href="/"
                 className="block rounded bg-blue-700 px-3 py-2 text-white md:bg-transparent md:p-0 md:text-blue-700 md:dark:text-blue-500"
                 aria-current="page"
               >
                 Home
-              </a>
+              </Link>
             </li>
             <li>
-              <a
-                href="#"
+              <Link
+                href="/blog"
                 className="block rounded px-3 py-2 text-gray-900 hover:bg-gray-100 dark:border-gray-700 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:p-0 md:hover:bg-transparent md:hover:text-blue-700 md:dark:hover:bg-transparent md:dark:hover:text-blue-500"
               >
                 Blog
-              </a>
+              </Link>
             </li>
             <li>
-              <a
-                href="#"
+              <Link
+                href="/reward"
                 className="block rounded px-3 py-2 text-gray-900 hover:bg-gray-100 dark:border-gray-700 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:p-0 md:hover:bg-transparent md:hover:text-blue-700 md:dark:hover:bg-transparent md:dark:hover:text-blue-500"
               >
                 Rewards
-              </a>
+              </Link>
             </li>
             <li>
-              <a
-                href="#"
+              <Link
+                href="/shop"
                 className="block rounded px-3 py-2 text-gray-900 hover:bg-gray-100 dark:border-gray-700 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:p-0 md:hover:bg-transparent md:hover:text-blue-700 md:dark:hover:bg-transparent md:dark:hover:text-blue-500"
               >
                 Shop
-              </a>
+              </Link>
             </li>
             <li>
-              <a
-                href="#"
+              <Link
+                href="/contact"
                 className="block rounded px-3 py-2 text-gray-900 hover:bg-gray-100 dark:border-gray-700 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:p-0 md:hover:bg-transparent md:hover:text-blue-700 md:dark:hover:bg-transparent md:dark:hover:text-blue-500"
               >
                 Contact
-              </a>
+              </Link>
             </li>
           </ul>
         </div>
