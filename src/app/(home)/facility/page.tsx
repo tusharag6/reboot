@@ -1,5 +1,5 @@
 import React from "react";
-import FacilityCard from "../_components/facility-card";
+import FacilityCard from "@/app/_components/facility-card";
 
 const Facility = () => {
   return (

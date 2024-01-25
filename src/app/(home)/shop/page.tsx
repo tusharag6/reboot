@@ -1,5 +1,5 @@
 import React from "react";
-import SustainableProductCard from "../_components/product-card";
+import SustainableProductCard from "@/app/_components/product-card";
 
 const ShopPage = () => {
   return (
