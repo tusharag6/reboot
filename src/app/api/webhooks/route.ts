@@ -1,3 +1,5 @@
+"use client";
+
 import { Webhook } from "svix";
 import { headers } from "next/headers";
 import type { WebhookEvent } from "@clerk/nextjs/server";
