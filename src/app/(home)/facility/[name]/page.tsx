@@ -1,5 +1,6 @@
 import FacilityMap from "@/app/_components/map";
-import { Facebook, Instagram, Star, Twitter, X } from "lucide-react";
+import { Facebook, Instagram, Star, Twitter } from "lucide-react";
+import Image from "next/image";
 import React from "react";
 
 const FacilityDetailsPage = () => {
@@ -7,10 +8,12 @@ const FacilityDetailsPage = () => {
     <section className="body-font overflow-hidden bg-white text-gray-700">
       <div className="container mx-auto px-5 pt-12">
         <div className="mx-auto flex flex-wrap lg:w-4/5">
-          <img
+          <Image
             alt="ecommerce"
             className="w-full rounded border border-gray-200 object-cover object-center lg:w-1/2"
             src="https://www.whitmorerarebooks.com/pictures/medium/2465.jpg"
+            width={500}
+            height={500}
           />
           <div className="mt-6 w-full lg:mt-0 lg:w-1/2 lg:py-6 lg:pl-10">
             <h2 className="title-font text-sm tracking-widest text-gray-500">

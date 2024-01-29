@@ -4,7 +4,6 @@ import { Inter } from "next/font/google";
 
 import { TRPCReactProvider } from "@/trpc/react";
 import { ClerkProvider } from "@clerk/nextjs";
-import Navbar from "./_components/navbar";
 
 const inter = Inter({
   subsets: ["latin"],
