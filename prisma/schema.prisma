@@ -11,8 +11,11 @@ datasource db {
 model User {
   id                        String      @id @default(uuid())
   externalId               String      @unique
-  attributes                Json
-  createdAt                 DateTime    @default(now())
-  updatedAt                 DateTime    @updatedAt
+  first_name                String     
+  last_name                 String   
+  image_url                 String      
+  email_addresses           Json?
+  username                 String?    
+  created_at                DateTime
+  updated_at                DateTime
 }
-

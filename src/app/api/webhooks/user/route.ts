@@ -1,7 +1,8 @@
-import { IncomingHttpHeaders } from "http";
+import type { IncomingHttpHeaders } from "http";
 import { headers } from "next/headers";
 import { NextResponse } from "next/server";
-import { Webhook, WebhookRequiredHeaders } from "svix";
+import { Webhook } from "svix";
+import type { WebhookRequiredHeaders } from "svix";
 import { PrismaClient } from "@prisma/client";
 
 const webhookSecret = process.env.WEBHOOK_SECRET ?? "";
@@ -31,17 +32,28 @@ async function handler(request: Request) {
   const eventType: EventType = evt.type;
   if (eventType === "user.created" || eventType === "user.updated") {
     const { id, ...attributes } = evt.data;
-
     await prisma.user.upsert({
       where: { externalId: id as string },
       create: {
         externalId: id as string,
-        attributes,
+        first_name: attributes.first_name as string,
+        last_name: attributes.last_name as string,
+        image_url: attributes.image_url as string,
+        email_addresses: attributes.email_addresses,
+        username: attributes.username as string,
+        created_at: new Date(attributes.created_at as string),
+        updated_at: new Date(attributes.updated_at as string),
       },
-      update: { attributes },
+      update: {
+        first_name: attributes.first_name as string,
+        last_name: attributes.last_name as string,
+        image_url: attributes.image_url as string,
+        email_addresses: attributes.email_addresses,
+        username: attributes.username as string,
+        created_at: new Date(attributes.created_at as string),
+        updated_at: new Date(attributes.updated_at as string),
+      },
     });
-    console.log(id);
-    console.log(attributes);
   }
 
   return NextResponse.json({}, { status: 200 });

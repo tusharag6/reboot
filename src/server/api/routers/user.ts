@@ -7,20 +7,21 @@ export const userRouter = createTRPCRouter({
     .input(
       z.object({
         id: z.string(),
+        externalId: z.string(),
         first_name: z.string(),
         last_name: z.string(),
         image_url: z.string(),
         email_addresses: z.string().optional(),
         username: z.string().optional(),
-        created_at: z.number(),
-        updated_at: z.number(),
-        last_sign_in_at: z.number(),
+        created_at: z.date(),
+        updated_at: z.date(),
       }),
     )
     .mutation(async ({ ctx, input }) => {
       const user = await ctx.db.user.upsert({
         where: { id: input.id },
         update: {
+          externalId: input.externalId,
           first_name: input.first_name,
           last_name: input.last_name,
           image_url: input.image_url,
@@ -28,9 +29,9 @@ export const userRouter = createTRPCRouter({
           username: input.username,
           created_at: input.created_at,
           updated_at: input.updated_at,
-          last_sign_in_at: input.last_sign_in_at,
         },
         create: {
+          externalId: input.externalId,
           id: input.id,
           first_name: input.first_name,
           last_name: input.last_name,
@@ -39,7 +40,6 @@ export const userRouter = createTRPCRouter({
           username: input.username,
           created_at: input.created_at,
           updated_at: input.updated_at,
-          last_sign_in_at: input.last_sign_in_at,
         },
       });
 
