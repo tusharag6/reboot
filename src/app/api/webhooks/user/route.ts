@@ -56,10 +56,17 @@ async function handler(request: Request) {
     });
   }
 
+  if (eventType === "user.deleted") {
+    const { id } = evt.data;
+    await prisma.user.delete({
+      where: { externalId: id as string },
+    });
+  }
+
   return NextResponse.json({}, { status: 200 });
 }
 
-type EventType = "user.created" | "user.updated" | "*";
+type EventType = "user.created" | "user.updated" | "user.deleted";
 
 type Event = {
   data: Record<string, string | number>;
