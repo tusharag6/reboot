@@ -24,6 +24,15 @@ model User {
 model Facility {
   id            Int                     @id @default(autoincrement())
   name          String
+  address       String
+  city          String
+  state         String
+  zip           String
+  phone         Int
+  email         String?
+  website       String?
+  latitude      Float?
+  longitude     Float?
   acceptedItems FacilityAcceptedItems[]
   requests      Request[]
 }
@@ -50,7 +59,9 @@ model Request {
   userId                String
   itemId                Int
   status                String
-  pickup                DateTime
+  pickupDate            DateTime
+  pickupAddress         String
+  userMobile            Int
   User                  User                  @relation(fields: [userId], references: [id])
   FacilityAcceptedItems FacilityAcceptedItems @relation(fields: [itemId], references: [id])
 }
