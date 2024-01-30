@@ -9,13 +9,48 @@ datasource db {
 }
 
 model User {
-  id                        String      @id @default(uuid())
-  externalId               String      @unique
-  first_name                String     
-  last_name                 String   
-  image_url                 String      
-  email_addresses           Json?
-  username                 String?    
-  created_at                DateTime
-  updated_at                DateTime
+  id              String    @id @default(uuid())
+  externalId      String    @unique
+  first_name      String
+  last_name       String
+  image_url       String
+  email_addresses Json?
+  username        String?
+  created_at      DateTime
+  updated_at      DateTime
+  requests        Request[]
+}
+
+model Facility {
+  id            Int                     @id @default(autoincrement())
+  name          String
+  acceptedItems FacilityAcceptedItems[]
+  requests      Request[]
+}
+
+model Item {
+  id                    Int                     @id @default(autoincrement())
+  name                  String
+  facilityAcceptedItems FacilityAcceptedItems[]
+}
+
+model FacilityAcceptedItems {
+  id         Int       @id @default(autoincrement())
+  facilityId Int
+  itemId     Int
+  requests   Request[]
+  Facility   Facility  @relation(fields: [facilityId], references: [id])
+  Item       Item      @relation(fields: [itemId], references: [id])
+}
+
+model Request {
+  id                    Int                   @id @default(autoincrement())
+  facility              Facility              @relation(fields: [facilityId], references: [id])
+  facilityId            Int
+  userId                String
+  itemId                Int
+  status                String
+  pickup                DateTime
+  User                  User                  @relation(fields: [userId], references: [id])
+  FacilityAcceptedItems FacilityAcceptedItems @relation(fields: [itemId], references: [id])
 }
