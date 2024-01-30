@@ -22,7 +22,7 @@ model User {
 }
 
 model Facility {
-  id            Int                     @id @default(autoincrement())
+  id            String                  @id @default(uuid())
   name          String
   address       String
   city          String
@@ -38,26 +38,26 @@ model Facility {
 }
 
 model Item {
-  id                    Int                     @id @default(autoincrement())
+  id                    String                  @id @default(uuid())
   name                  String
   facilityAcceptedItems FacilityAcceptedItems[]
 }
 
 model FacilityAcceptedItems {
-  id         Int       @id @default(autoincrement())
-  facilityId Int
-  itemId     Int
+  id         String    @id @default(uuid())
+  facilityId String
+  itemId     String
   requests   Request[]
   Facility   Facility  @relation(fields: [facilityId], references: [id])
   Item       Item      @relation(fields: [itemId], references: [id])
 }
 
 model Request {
-  id                    Int                   @id @default(autoincrement())
+  id                    String                @id @default(uuid())
   facility              Facility              @relation(fields: [facilityId], references: [id])
-  facilityId            Int
+  facilityId            String
   userId                String
-  itemId                Int
+  itemId                String
   status                String
   pickupDate            DateTime
   pickupAddress         String
