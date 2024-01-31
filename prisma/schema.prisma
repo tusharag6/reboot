@@ -3,9 +3,9 @@ generator client {
 }
 
 datasource db {
-  provider  = "postgresql"
-  url       = env("DATABASE_URL")
-  directUrl = env("DIRECT_URL")
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+  // directUrl = env("DIRECT_URL")
 }
 
 model User {
@@ -14,7 +14,7 @@ model User {
   first_name      String
   last_name       String
   image_url       String
-  email_addresses Json?
+  email_addresses String?
   username        String?
   created_at      DateTime
   updated_at      DateTime
@@ -35,12 +35,16 @@ model Facility {
   longitude     Float?
   acceptedItems FacilityAcceptedItems[]
   requests      Request[]
+  createdAt     DateTime                @default(now())
+  updatedAt     DateTime                @updatedAt
 }
 
 model Item {
   id                    String                  @id @default(uuid())
   name                  String
   facilityAcceptedItems FacilityAcceptedItems[]
+  createdAt             DateTime                @default(now())
+  updatedAt             DateTime                @updatedAt
 }
 
 model FacilityAcceptedItems {
@@ -50,6 +54,8 @@ model FacilityAcceptedItems {
   requests   Request[]
   Facility   Facility  @relation(fields: [facilityId], references: [id])
   Item       Item      @relation(fields: [itemId], references: [id])
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
 }
 
 model Request {
@@ -64,4 +70,6 @@ model Request {
   userMobile            Int
   User                  User                  @relation(fields: [userId], references: [id])
   FacilityAcceptedItems FacilityAcceptedItems @relation(fields: [itemId], references: [id])
+  createdAt             DateTime              @default(now())
+  updatedAt             DateTime              @updatedAt
 }
