@@ -64,7 +64,7 @@ model Request {
   facilityId            String
   userId                String
   itemId                String
-  status                String
+  status                String                @default("pending")
   pickupDate            DateTime
   pickupAddress         String
   userMobile            Int
