@@ -10,7 +10,7 @@ interface Item {
   updatedAt: Date;
 }
 
-interface FacilityAcceptedItems {
+export interface FacilityAcceptedItems {
   id: string;
   facilityId: string;
   itemId: string;

@@ -1,7 +1,27 @@
-import React from "react";
+"use client";
+import React, { useEffect, useState } from "react";
 import FacilityCard from "@/app/_components/facility-card";
+import { useSearchParams } from "next/navigation";
+import { api } from "@/utils/api";
+import { Facility } from "@/server/api/routers/facility";
 
 const Facility = () => {
+  const searchParams = useSearchParams();
+  const city = searchParams.get("location") ?? "";
+  const searchItem = searchParams.get("item");
+  const [facilities, setFacilities] = useState<Facility[]>();
+
+  const { data } = api.facilty.search.useQuery({
+    city,
+    searchItem,
+  });
+  useEffect(() => {
+    if (data) {
+      setFacilities(data);
+    }
+  }, [data]);
+  console.log(facilities);
+
   return (
     <section className="bg-white dark:bg-gray-900">
       <div className="mx-auto max-w-screen-xl px-4 pt-8 text-center lg:px-12 lg:pt-16">
@@ -14,12 +34,9 @@ const Facility = () => {
           waste into environmental solutions.
         </p>
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          <FacilityCard />
-          <FacilityCard />
-          <FacilityCard />
-          <FacilityCard />
-          <FacilityCard />
-          <FacilityCard />
+          {facilities?.map((facility) => (
+            <FacilityCard {...facility} key={facility.id} />
+          ))}
         </div>
       </div>
     </section>

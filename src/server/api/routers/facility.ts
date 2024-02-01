@@ -3,7 +3,7 @@ import { z } from "zod";
 import { createTRPCRouter, publicProcedure } from "@/server/api/trpc";
 import { TRPCError } from "@trpc/server";
 
-interface Facility {
+export interface Facility {
   id: string;
   name: string;
   address: string;
@@ -17,6 +17,10 @@ interface Facility {
   longitude: number | null;
   createdAt: Date;
   updatedAt: Date;
+}
+
+interface FacilitySearchedItem {
+  facilityId: string;
 }
 
 export const facilityRouter = createTRPCRouter({
@@ -48,13 +52,44 @@ export const facilityRouter = createTRPCRouter({
     .input(
       z.object({
         city: z.string(),
+        searchItem: z.string().nullable().optional(),
       }),
     )
     .query(async ({ ctx, input }) => {
-      const facilities = (await ctx.db.facility.findMany({
-        where: { city: input.city },
-        orderBy: [{ createdAt: "desc" }],
-      })) as Facility[];
+      const { city, searchItem } = input;
+      let facilities;
+
+      if (searchItem) {
+        const facilitiesWithSearchedItem =
+          (await ctx.db.facilityAcceptedItems.findMany({
+            where: {
+              Item: {
+                name: searchItem,
+              },
+            },
+            select: {
+              facilityId: true,
+            },
+          })) as FacilitySearchedItem[];
+
+        const facilityIds = facilitiesWithSearchedItem.map((f) => f.facilityId);
+
+        // Then, use those IDs to filter facilities by city
+        facilities = (await ctx.db.facility.findMany({
+          where: {
+            id: {
+              in: facilityIds,
+            },
+            city: city,
+          },
+        })) as Facility[];
+      } else {
+        facilities = (await ctx.db.facility.findMany({
+          where: {
+            city: city,
+          },
+        })) as Facility[];
+      }
 
       return facilities;
     }),

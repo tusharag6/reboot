@@ -19,17 +19,13 @@ import {
   PopoverTrigger,
 } from "@/app/_components/ui/popover";
 
-interface ItemSearchInputProps {
-  onSelectItem: (selectedValue: string) => void;
-}
-
-export function ItemSearchInput({ onSelectItem }: ItemSearchInputProps) {
+export function ItemSearchInput() {
   const [open, setOpen] = React.useState(false);
   const [value, setValue] = React.useState("");
 
   const handleSelectItem = (selectedValue: string) => {
     setValue(selectedValue);
-    onSelectItem(selectedValue);
+    sessionStorage.setItem("item", selectedValue);
     setOpen(false);
   };
 

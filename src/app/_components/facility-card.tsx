@@ -1,7 +1,14 @@
+"use client";
+import type { Facility } from "@/server/api/routers/facility";
+import { api } from "@/utils/api";
 import Image from "next/image";
 import React from "react";
 
-const FacilityCard = () => {
+const FacilityCard = (props: Facility) => {
+  const { id, name, city } = props;
+  const { data } = api.item.getItemsAcceptedByFacility.useQuery({ id });
+  console.log("Accpeted Items", data);
+
   return (
     <div className="relative flex w-full max-w-[26rem] flex-col rounded-xl bg-white bg-clip-border text-gray-700 shadow-lg">
       <div className="bg-blue-gray-500 shadow-blue-gray-500/40 relative mx-4 mt-4 overflow-hidden rounded-xl bg-clip-border text-white shadow-lg">
@@ -16,7 +23,7 @@ const FacilityCard = () => {
       <div className="p-6">
         <div className="mb-3 flex items-center justify-between">
           <h5 className="text-blue-gray-900 block font-sans text-xl font-medium leading-snug tracking-normal antialiased">
-            Wooden House, Florida
+            {name}, {city}
           </h5>
           <p className="text-blue-gray-900 flex items-center gap-1.5 font-sans text-base font-normal leading-relaxed antialiased">
             <svg

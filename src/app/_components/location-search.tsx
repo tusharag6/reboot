@@ -23,42 +23,24 @@ interface Framework {
   label: string;
 }
 
-interface LocationSearchInputProps {
-  onSelectLocation: (selectedValue: string) => void;
-}
-
 const frameworks: Framework[] = [
   {
-    value: "next.js",
-    label: "Next.js",
+    value: "bhubaneswar",
+    label: "Bhubaneswar",
   },
   {
-    value: "sveltekit",
-    label: "SvelteKit",
-  },
-  {
-    value: "nuxt.js",
-    label: "Nuxt.js",
-  },
-  {
-    value: "remix",
-    label: "Remix",
-  },
-  {
-    value: "astro",
-    label: "Astro",
+    value: "sambalpur",
+    label: "Sambalpur",
   },
 ];
 
-export function LocationSearchInput({
-  onSelectLocation,
-}: LocationSearchInputProps) {
+export function LocationSearchInput() {
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState("");
 
   const handleSelectLocation = (selectedValue: string) => {
     setValue(selectedValue);
-    onSelectLocation(selectedValue);
+    sessionStorage.setItem("location", selectedValue);
     setOpen(false);
   };
 
