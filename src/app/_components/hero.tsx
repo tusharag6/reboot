@@ -1,6 +1,5 @@
 import React from "react";
 import SearchInput from "./ui/search-input";
-
 const Hero = () => {
   return (
     <section className="bg-white dark:bg-gray-900">
@@ -30,10 +29,10 @@ const Hero = () => {
           ></path>
         </svg>
       </a> */}
-        <h1 className="mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white">
+        <h1 className="mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 dark:text-white md:text-5xl lg:text-6xl">
           Reboot Today, Sustain Tomorrow
         </h1>
-        <p className="mb-8 text-lg font-normal text-gray-500 sm:px-16 lg:text-xl xl:px-48 dark:text-gray-400">
+        <p className="mb-8 text-lg font-normal text-gray-500 dark:text-gray-400 sm:px-16 lg:text-xl xl:px-48">
           Transforming Electronic Waste into Environmental Solutions, One Device
           at a Time.
         </p>
