@@ -4,6 +4,7 @@ import FacilityCard from "@/app/_components/facility-card";
 import { useSearchParams } from "next/navigation";
 import { api } from "@/utils/api";
 import { Facility } from "@/server/api/routers/facility";
+import { Link } from "lucide-react";
 
 const Facility = () => {
   const searchParams = useSearchParams();
@@ -35,7 +36,9 @@ const Facility = () => {
         </p>
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {facilities?.map((facility) => (
-            <FacilityCard {...facility} key={facility.id} />
+            <Link href={`/facility/${facility.id}`} key={facility.id}>
+              <FacilityCard {...facility} />
+            </Link>
           ))}
         </div>
       </div>

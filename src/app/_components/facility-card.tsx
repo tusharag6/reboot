@@ -2,6 +2,7 @@
 import type { Facility } from "@/server/api/routers/facility";
 import { api } from "@/utils/api";
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 
 const FacilityCard = (props: Facility) => {
@@ -122,12 +123,14 @@ const FacilityCard = (props: Facility) => {
         </div>
       </div>
       <div className="p-6 pt-3">
-        <button
-          className="block w-full select-none rounded-lg bg-gray-900 px-7 py-3.5 text-center align-middle font-sans text-sm font-bold uppercase text-white shadow-md shadow-gray-900/10 transition-all hover:shadow-lg hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
-          type="button"
-        >
-          Book a Pickup
-        </button>
+        <Link href={`/facility/${id}`}>
+          <button
+            className="block w-full select-none rounded-lg bg-gray-900 px-7 py-3.5 text-center align-middle font-sans text-sm font-bold uppercase text-white shadow-md shadow-gray-900/10 transition-all hover:shadow-lg hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+            type="button"
+          >
+            View Details
+          </button>
+        </Link>
       </div>
     </div>
   );

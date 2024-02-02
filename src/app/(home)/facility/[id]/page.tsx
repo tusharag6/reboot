@@ -1,9 +1,16 @@
+"use client";
+
 import FacilityMap from "@/app/_components/map";
+import { api } from "@/utils/api";
 import { Facebook, Instagram, Star, Twitter } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
+import { useParams } from "next/navigation";
 import React from "react";
 
 const FacilityDetailsPage = () => {
+  const params = useParams<{ id: string }>();
+  const facility = api.facilty.getById.useQuery(params);
   return (
     <section className="body-font overflow-hidden bg-white text-gray-700">
       <div className="container mx-auto px-5 pt-12">
@@ -11,16 +18,16 @@ const FacilityDetailsPage = () => {
           <Image
             alt="ecommerce"
             className="w-full rounded border border-gray-200 object-cover object-center lg:w-1/2"
-            src="https://www.whitmorerarebooks.com/pictures/medium/2465.jpg"
+            src="/tv.jpg"
             width={500}
             height={500}
           />
           <div className="mt-6 w-full lg:mt-0 lg:w-1/2 lg:py-6 lg:pl-10">
             <h2 className="title-font text-sm tracking-widest text-gray-500">
-              LOCATION
+              {facility.data?.city}
             </h2>
             <h1 className="title-font mb-1 text-3xl font-medium text-gray-900">
-              FACILITY NAME
+              {facility.data?.name}
             </h1>
             <div className="mb-4 flex">
               <span className="flex items-center">
@@ -126,9 +133,11 @@ const FacilityDetailsPage = () => {
               <span className="title-font text-2xl font-medium text-gray-900">
                 $58.00
               </span>
-              <button className="ml-auto flex rounded border-0 bg-red-500 px-6 py-2 text-white hover:bg-red-600 focus:outline-none">
-                Button
-              </button>
+              <Link href="/request">
+                <button className="ml-auto flex rounded border-0 bg-red-500 px-6 py-2 text-white hover:bg-red-600 focus:outline-none">
+                  Book a Pickup
+                </button>
+              </Link>
             </div>
           </div>
         </div>
