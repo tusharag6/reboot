@@ -1,0 +1,44 @@
+{
+  "name": "api",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/api/src",
+  "projectType": "application",
+  "tags": [],
+  "targets": {
+    "serve": {
+      "executor": "@nx/js:node",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "api:build"
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "api:build:development"
+        },
+        "production": {
+          "buildTarget": "api:build:production"
+        }
+      }
+    },
+    "generate": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": ["drizzle-kit generate --config=apps/api/drizzle.config.ts"]
+      }
+    },
+    "migrate": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          "cross-env DB_MIGRATING=true tsx apps/api/src/db/migrate.ts"
+        ]
+      }
+    },
+    "seed": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": ["cross-env DB_SEEDING=true tsx apps/api/src/db/seed.ts"]
+      }
+    }
+  }
+}
